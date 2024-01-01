@@ -9,4 +9,5 @@ export const COLORS = {
     redHover: '#cb5e5e',
     green: '#429639',
     greenHover: '#4bc43e',
+    mainGrey: '#cccccc',
 };

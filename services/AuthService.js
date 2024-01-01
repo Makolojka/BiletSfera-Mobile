@@ -28,12 +28,15 @@ class AuthService {
                 }
             }
         } catch (error) {
+            if (error.response && error.response.status === 401) {
+                return 'Unauthorized';
+            }
             console.error('Authentication error:', error);
         }
         return false;
     }
 
-    getTokenAndDecode = async () => {
+    getUserId = async () => {
         try {
             const token = await AsyncStorage.getItem('token');
             if (token) {
@@ -49,10 +52,25 @@ class AuthService {
         }
     };
 
+    getUserDetails = async () => {
+        try {
+            const token = await AsyncStorage.getItem('token');
+            if (token) {
+                const decoded = jwtDecode(token);
+                const email = decoded.email;
+                const name = decoded.name;
+                return { email, name };
+            }
+        } catch (error) {
+            console.error('Error decoding token:', error);
+        }
+    };
+
+
     async logout() {
         try {
             // TODO: userId dynamically
-            let userId = "658c6381e381c64f248fa9c0";
+            let userId = await this.getUserId();
 
             const response = await axios.delete(this.url + '/user/logout/'+userId,{
                 headers: {
@@ -62,7 +80,8 @@ class AuthService {
             });
             if (response.status === 200) {
                 const result = response.data;
-                if (result && result.token) {
+                if (result) {
+                    console.log("await AsyncStorage.removeItem('token')")
                     await AsyncStorage.removeItem('token');
                     return true;
                 }

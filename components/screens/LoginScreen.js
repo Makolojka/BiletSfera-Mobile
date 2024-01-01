@@ -34,13 +34,21 @@ const LoginScreen = (props) => {
 
     const logIn = async () => {
         const isAuthenticated = await AuthService.authenticate({ login, password });
-        if (isAuthenticated) {
+        if (isAuthenticated === 'Unauthorized') {
+            showMessage({
+                message: 'Nieprawidłowe dane logowania.',
+                type: 'danger',
+                backgroundColor: COLORS.red,
+                color: COLORS.main,
+                style: { display: 'flex', alignContent: 'center', alignItems: 'center' }
+            });
+        } else if (isAuthenticated) {
             showMessage({
                 message: 'Zalogowano.',
                 type: 'success',
                 backgroundColor: COLORS.green,
                 color: COLORS.main,
-                style: {display: "flex", alignContent: "center", alignItems: "center"}
+                style: { display: 'flex', alignContent: 'center', alignItems: 'center' }
             });
             await goToRegister();
         } else {
@@ -49,10 +57,11 @@ const LoginScreen = (props) => {
                 type: 'danger',
                 backgroundColor: COLORS.red,
                 color: COLORS.main,
-                style: {display: "flex", alignContent: "center", alignItems: "center"}
+                style: { display: 'flex', alignContent: 'center', alignItems: 'center' }
             });
         }
     };
+
     const goToRegister = async () => {
         props.navigation.navigate('UserNav');
         setLogin('');
@@ -60,18 +69,9 @@ const LoginScreen = (props) => {
     }
 
     const validateFields = async () => {
-        const strongRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,15}$/;
         if (login === '' || password === '' || login == null || password == null) {
             showMessage({
                 message: 'Uzupełnij wszystkie pola.',
-                type: 'warning',
-                backgroundColor: COLORS.red,
-                color: COLORS.main,
-                style: {display: "flex", alignContent: "center", alignItems: "center"}
-            });
-        } else if (!strongRegex.test(password)) {
-            showMessage({
-                message: 'Hasło jest zbyt słabe. Użyj silniejszego hasła.',
                 type: 'warning',
                 backgroundColor: COLORS.red,
                 color: COLORS.main,
@@ -88,7 +88,7 @@ const LoginScreen = (props) => {
 
     return (
         <ImageBackground
-            source={require('../screens/img/party.jpg')}
+            source={require('../screens/img/bg_1.jpg')}
             style={styles.background}
             resizeMode="cover"
         >
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
     },
     section: {
         justifyContent: 'center',
