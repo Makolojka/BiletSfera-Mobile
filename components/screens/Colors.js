@@ -10,4 +10,6 @@ export const COLORS = {
     green: '#429639',
     greenHover: '#4bc43e',
     mainGrey: '#cccccc',
+    secondGrey: '#dddddd',
+    mainGreyDark: '#222222',
 };
