@@ -26,11 +26,6 @@ const HomeScreen = (props) => {
     };
 
     return (
-        // <ImageBackground
-        //     source={require('../screens/img/bg_2.jpg')}
-        //     style={styles.background}
-        //     resizeMode="cover"
-        // >
             <ScrollView contentContainerStyle={styles.container}>
                 <Text style={styles.title}>Panel użytkownika</Text>
                 <View style={styles.tilesContainer}>
@@ -51,8 +46,8 @@ const HomeScreen = (props) => {
 const styles = StyleSheet.create({
     background: {
         flex: 1,
-        width: '100%',
-        height: '100%',
+        // width: '100%',
+        // height: '100%',
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -91,18 +86,18 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.main,
         // elevation: 5,
         borderWidth: 1,
-        borderColor: COLORS.third,
+        borderColor: COLORS.mainGrey,
         elevation: 10,
     },
     tileText: {
         margin: 5,
         fontSize: 18,
         textAlign: "center",
-        color: COLORS.third,
+        color: COLORS.mainGreyDark,
     },
     icon: {
         fontSize: 60,
-        color: COLORS.third,
+        color: COLORS.mainGreyDark,
     },
 });
 export default HomeScreen;

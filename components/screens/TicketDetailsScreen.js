@@ -12,14 +12,21 @@ const TicketDetailsScreen = (props) => {
 
     useEffect(() => {
         const fetchData = async () => {
+            // console.log("transaction: ",transaction)
             const eventDetails = await DataService.getEventDetailsById(props.route.params.ticket.eventId);
             setEventDetails(eventDetails);
             setTicket(props.route.params.ticket);
             setTransaction(props.route.params.transaction);
+            // props.route.params.transaction?.tickets[0].seatNumbers.length
         };
         fetchData();
     }, [props.route.params.ticket, props.route.params.transaction]);
 
+
+    const navigateToEventDetails = (eventId) => {
+        console.log("eventId:", eventId)
+        // props.navigation.navigate('EventDetails', { eventId });
+    };
 
     return (
         <ImageBackground
@@ -35,28 +42,33 @@ const TicketDetailsScreen = (props) => {
                         <View style={styles.row}>
                             <MaterialIcons style={styles.icon} name="tag" color="#333" />
                             <Text style={styles.text}>{ticket.ticketName}</Text>
+                            <Text style={styles.text}>x {ticket.count}</Text>
                         </View>
                         <View style={styles.row}>
                             <MaterialIcons style={styles.icon} name="clock-outline" color="#333" />
                             <Text style={styles.text}>{eventDetails.date}</Text>
                         </View>
                         <View style={styles.row}>
-                            <MaterialIcons style={styles.icon} name="money" color="#333" />
-                            <Text style={styles.text}>{ticket.ticketPrice}</Text>
+                            <MaterialIcons style={styles.icon} name="google-maps" color="#333" />
+                            <Text style={styles.text}>{eventDetails.location}</Text>
                         </View>
-                        <Text style={styles.text}>Cena za pojedynczy bilet: </Text>
-                        <Text style={styles.text}>Ilość biletów: {ticket.count}</Text>
-                        <View style={styles.seatNumbers}>
-                            {ticket.seatNumbers && ticket.seatNumbers.length > 0 && (
-                                <Text style={styles.label}>Numery siedzeń:</Text>
-                            )}
-                            {transaction?.tickets?.map((ticket, index) => (
-                                <View key={index} style={styles.row}>
-                                    {ticket.seatNumbers?.map((seat, idx) => (
-                                        <Text key={idx} style={styles.seat}>{seat}</Text>
-                                    ))}
-                                </View>
-                            ))}
+                        <View style={styles.row}>
+                            <View style={styles.seatNumbers}>
+                                {transaction?.tickets?.map((ticket, index) => (
+                                    <View key={index} style={styles.row}>
+                                        {ticket.seatNumbers && ticket.seatNumbers.length > 0 && (
+                                            <MaterialIcons style={styles.icon} name="seat-recline-extra" color="#333" />
+                                        )}
+                                        {ticket.seatNumbers?.map((seat, idx) => (
+                                            <Text key={idx} style={styles.seat}>{seat}</Text>
+                                        ))}
+                                    </View>
+                                ))}
+                            </View>
+                        </View>
+                        <View style={styles.rowSum}>
+                            <Text style={styles.textSum}>Cena całkowita</Text>
+                            <Text style={styles.priceTotal}>{transaction.totalCost} zł</Text>
                         </View>
                     </View>
                     <View style={styles.qrContainer}>
@@ -66,7 +78,7 @@ const TicketDetailsScreen = (props) => {
                             size={150}
                         />
                         <Text style={styles.label}>Więcej informacji o wydarzeniu znajdziesz tutaj:
-                            <Text style={styles.more}> szczegóły</Text>
+                            <Text style={styles.more} onPress={() => navigateToEventDetails(ticket.eventId)}> szczegóły</Text>
                         </Text>
                     </View>
                 </View>
@@ -94,12 +106,14 @@ const styles = StyleSheet.create({
     },
     label: {
         fontSize: 18,
-        margin: 10,
+        marginBottom: 10,
+        marginTop: 10,
         color: COLORS.third,
         textAlign: 'center',
     },
     seatNumbers: {
-        marginBottom: 20,
+        alignItems: 'center',
+        marginBottom: 0,
     },
     ticketIndex: {
         fontSize: 16,
@@ -108,9 +122,10 @@ const styles = StyleSheet.create({
         color: COLORS.third,
     },
     seat: {
-        fontSize: 14,
+        fontSize: 18,
         color: 'black',
-        marginRight: 10,
+        marginRight: 5,
+        marginLeft: 15,
     },
     detailsContainer: {
         padding: 20,
@@ -129,7 +144,23 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginBottom: 10,
     },
+    rowSum: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginBottom: 0,
+    },
+    textSum: {
+        fontSize: 22,
+        color: COLORS.third,
+    },
+    priceTotal: {
+        fontSize: 22,
+        color: COLORS.second,
+        fontWeight: 'bold',
+    },
     text: {
+        padding: 5,
         fontSize: 18,
         color: COLORS.mainGreyDark,
         marginLeft: 10,
@@ -138,14 +169,20 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: COLORS.third,
         fontWeight: 'bold',
-    },
-    more: {
-        fontSize: 20,
-        color: COLORS.second
+        marginBottom: 10,
     },
     icon: {
         fontSize: 22,
         color: COLORS.third,
+    },
+    button: {
+        margin: 0,
+        padding: 0,
+        backgroundColor: COLORS.third
+    },
+    more: {
+        fontSize: 20,
+        color: COLORS.second,
     },
 });
 
