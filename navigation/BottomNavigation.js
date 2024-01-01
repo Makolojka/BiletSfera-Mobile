@@ -10,21 +10,18 @@ import HomeScreen from "../components/screens/HomeScreen";
 import LogoutScreen from "../components/screens/LogoutScreen";
 import {ImageBackground} from "react-native";
 import ProfileScreen from "../components/screens/ProfileScreen";
+import TicketDetailsScreen from "../components/screens/TicketDetailsScreen";
 
 const Tab = createBottomTabNavigator();
 
 const BottomNavigation = (props) => {
     // const navigation = useNavigation();
     // const [isLogged, setIsLogged] = useState(false);
-    // React.useEffect(() => {
-    //     return props.navigation.addListener('focus', async () => {
-    //         const token = await AsyncStorage.getItem('token');
-    //         console.log("token: ", token)
-    //         if(token !== null && token !== ''){
-    //             props.navigation.navigate('Home');
-    //         }
-    //     });
-    // }, [props.navigation]);
+    useEffect(() => {
+        return props.navigation.addListener('focus', async () => {
+            props.navigation.navigate('Home');
+        });
+    }, [props.navigation]);
 
     return (
         <Tab.Navigator
@@ -105,6 +102,24 @@ const BottomNavigation = (props) => {
                     },
                     headerShown: false,
                 }}
+            />
+            <Tab.Screen
+                name="TicketDetails"
+                component={TicketDetailsScreen}
+                options={({ route }) => ({
+                    tabBarButton: (props) =>
+                        route.state && route.state.index > 0 ? null : (
+                            <Tab.Screen {...props} />
+                        ),
+                    tabBarLabel: 'Szczegóły biletu',
+                    tabBarIcon: ({ color, size }) => (
+                        <MaterialCommunityIcons name="account" color={COLORS.third} size={size} />
+                    ),
+                    tabBarLabelStyle: {
+                        color: COLORS.third,
+                    },
+                    headerShown: false,
+                })}
             />
         </Tab.Navigator>
     );

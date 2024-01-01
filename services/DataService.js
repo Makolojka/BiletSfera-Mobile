@@ -32,6 +32,17 @@ class DataService {
             throw error;
         }
     }
+
+    async getEventDetailsById(eventId) {
+        try {
+            const response = await axios.get(this.url+ '/events/'+eventId);
+            // console.log("response: ",response.data)
+            return response.data;
+        } catch (error) {
+            console.error('Error fetching ticket details:', error);
+            throw error;
+        }
+    }
 }
 
 export default new DataService();

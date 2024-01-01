@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, ScrollView, StyleSheet } from 'react-native';
+import {View, Text, ScrollView, StyleSheet, TouchableOpacity} from 'react-native';
 import DataService from "../../services/DataService";
 import {COLORS} from "./Colors";
 import {formatDate} from "../../utils/DataHelper";
 
-const TransactionsScreen = () => {
+const TransactionsScreen = (props) => {
     const [transactions, setTransactions] = useState([]);
 
     useEffect(() => {
@@ -37,6 +37,12 @@ const TransactionsScreen = () => {
         fetchTransactions();
     }, []);
 
+    const navigateToTicketDetails = (ticketObj, transactionObj) => {
+        // console.log("ticketObj eventId: ",ticketObj.eventId)
+        // console.log("transactionObj: ",transactionObj)
+        props.navigation.navigate('TicketDetails', { ticket: ticketObj, transaction: transactionObj });
+    };
+
     return (
         <ScrollView contentContainerStyle={styles.container}>
             <Text style={styles.title}>Historia zakupów</Text>
@@ -49,7 +55,12 @@ const TransactionsScreen = () => {
                         {transaction?.ticketDetails?.map((ticket, idx) => (
                             <View key={idx} style={styles.ticketDetail}>
                                 <Text style={styles.text}>{ticket?.count} bilet(ów) {ticket?.ticketName} - {ticket?.ticketPrice} zł</Text>
-                                {/* Add button for PDF download if needed */}
+                                <TouchableOpacity
+                                    style={styles.button}
+                                    onPress={() => navigateToTicketDetails(ticket, transaction)}
+                                >
+                                    <Text style={styles.buttonText}>Szczegóły</Text>
+                                </TouchableOpacity>
                             </View>
                         ))}
                     </View>
@@ -92,6 +103,22 @@ const styles = StyleSheet.create({
     },
     text: {
         color: 'black'
+    },
+    button:{
+        borderWidth: 1,
+        borderColor: COLORS.third,
+        backgroundColor: COLORS.second,
+        textAlign: "center",
+        alignItems: 'center',
+        paddingTop: 8,
+        paddingBottom: 8,
+        margin: 10,
+    },
+    buttonText:{
+        color: COLORS.main,
+        textTransform: 'uppercase',
+        fontSize: 12,
+        fontWeight: "bold",
     }
 });
 

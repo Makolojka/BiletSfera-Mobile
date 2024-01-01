@@ -1,7 +1,8 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from "axios";
-import { jwtDecode } from 'jwt-decode';
-import { decode } from "base-64";
+import {jwtDecode} from 'jwt-decode';
+import {decode} from "base-64";
+
 global.atob = decode;
 
 class AuthService {
@@ -42,10 +43,9 @@ class AuthService {
             if (token) {
                 // const decodedToken = jwtDecode(token);
                 const decoded = jwtDecode(token);
-                console.log(decoded);
-                const userId = decoded.userId;
-                console.log('User ID:', userId);
-                return userId;
+                // console.log(decoded);
+                // console.log('User ID:', userId);
+                return decoded.userId;
             }
         } catch (error) {
             console.error('Error decoding token:', error);
@@ -81,7 +81,7 @@ class AuthService {
             if (response.status === 200) {
                 const result = response.data;
                 if (result) {
-                    console.log("await AsyncStorage.removeItem('token')")
+                    // console.log("await AsyncStorage.removeItem('token')")
                     await AsyncStorage.removeItem('token');
                     return true;
                 }
@@ -98,7 +98,7 @@ class AuthService {
         try {
             const token = await AsyncStorage.getItem('token');
             if (token !== null && token !== ''){
-                console.log("token: ", token)
+                // console.log("token: ", token)
                 return true;
             }
             return false; // Returns true if token exists
