@@ -1,17 +1,13 @@
 import React from 'react';
 import {NavigationContainer} from "@react-navigation/native";
-import BottomNavigation from "./navigation/BottomNavigation";
-import LoginScreen from "./components/screens/LoginScreen";
 import FlashMessage from "react-native-flash-message";
+import LoginTabs from "./navigation/LoginTabs";
 
 const App = () => {
     return (
-        // <NavigationContainer>
-        //     <BottomNavigation/>
-        // </NavigationContainer>
-        <LoginScreen>
-        </LoginScreen>
-
+        <NavigationContainer>
+            <LoginTabs />
+        </NavigationContainer>
     );
 };
 export default App;

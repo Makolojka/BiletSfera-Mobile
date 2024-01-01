@@ -10,13 +10,27 @@ import {
 } from 'react-native';
 import {COLORS} from "./Colors";
 import FlashMessage, {showMessage} from 'react-native-flash-message';
-import AuthService from "../AuthService";
+import AuthService from "../../services/AuthService";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
-const LoginScreen = ({navigation}) => {
+const LoginScreen = (props) => {
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
-    // const dispatch = useDispatch();
+
+    React.useEffect(() => {
+        const fetchData = async () => {
+            if(await AuthService.isLoggedIn()){
+                // console.log("token: ", AuthService.isLoggedIn())
+                props.navigation.navigate('UserNav');
+            }
+        };
+        let a = fetchData();
+
+        // The cleanup function
+        return () => {};
+
+    }, [props.navigation]);
 
     const logIn = async () => {
         const isAuthenticated = await AuthService.authenticate({ login, password });
@@ -28,6 +42,7 @@ const LoginScreen = ({navigation}) => {
                 color: COLORS.main,
                 style: {display: "flex", alignContent: "center", alignItems: "center"}
             });
+            await goToRegister();
         } else {
             showMessage({
                 message: 'Nieznany błąd.',
@@ -39,7 +54,7 @@ const LoginScreen = ({navigation}) => {
         }
     };
     const goToRegister = async () => {
-        navigation.navigate('Transakcje');
+        props.navigation.navigate('UserNav');
         setLogin('');
         setPassword('');
     }
