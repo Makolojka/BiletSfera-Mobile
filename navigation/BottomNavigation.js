@@ -11,6 +11,7 @@ import LogoutScreen from "../components/screens/LogoutScreen";
 import {ImageBackground} from "react-native";
 import ProfileScreen from "../components/screens/ProfileScreen";
 import TicketDetailsScreen from "../components/screens/TicketDetailsScreen";
+import EventDetailsScreen from "../components/screens/EventDetailsScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -112,6 +113,24 @@ const BottomNavigation = (props) => {
                             <Tab.Screen {...props} />
                         ),
                     tabBarLabel: 'Szczegóły biletu',
+                    tabBarIcon: ({ color, size }) => (
+                        <MaterialCommunityIcons name="account" color={COLORS.third} size={size} />
+                    ),
+                    tabBarLabelStyle: {
+                        color: COLORS.third,
+                    },
+                    headerShown: false,
+                })}
+            />
+            <Tab.Screen
+                name="EventDetails"
+                component={EventDetailsScreen}
+                options={({ route }) => ({
+                    tabBarButton: (props) =>
+                        route.state && route.state.index > 0 ? null : (
+                            <Tab.Screen {...props} />
+                        ),
+                    tabBarLabel: 'Szczegóły wydarzenia',
                     tabBarIcon: ({ color, size }) => (
                         <MaterialCommunityIcons name="account" color={COLORS.third} size={size} />
                     ),

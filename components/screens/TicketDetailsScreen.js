@@ -25,6 +25,7 @@ const TicketDetailsScreen = (props) => {
 
     const navigateToEventDetails = (eventId) => {
         console.log("eventId:", eventId)
+        props.navigation.navigate('EventDetails', { eventId });
         // props.navigation.navigate('EventDetails', { eventId });
     };
 
