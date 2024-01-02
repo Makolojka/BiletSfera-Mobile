@@ -8,6 +8,19 @@ const EventDetailsScreen = (props) => {
     // const [eventId, setEventId] = useState([]);
     const [artists, setArtists] = useState([]);
     const [eventDetails, setEventDetails] = useState([]);
+    const [showFullText, setShowFullText] = useState(false);
+    const toggleText = () => {
+        setShowFullText(!showFullText);
+    };
+
+    const renderText = () => {
+        const additionalText = eventDetails?.additionalText || '';
+        if (showFullText || additionalText.length <= 200) {
+            return additionalText;
+        } else {
+            return additionalText.slice(0, 200) + '...';
+        }
+    };
 
     useEffect(() => {
         const fetchData = async () => {
@@ -35,9 +48,9 @@ const EventDetailsScreen = (props) => {
                 {/* Top banner */}
             </ImageBackground>
             <View style={styles.container}>
-                <View style={styles.infoContainer}>
-                    <Text style={styles.sectionTitle}>Nazwa wydarzenia</Text>
-                    <Text style={styles.sectionContent}>{eventDetails.title}</Text>
+                <View style={styles.titleContainer}>
+                    {/*<Text style={styles.sectionTitle}>Nazwa wydarzenia</Text>*/}
+                    <Text style={styles.titleText}>{eventDetails.title}</Text>
                 </View>
 
                 <View style={styles.infoContainer}>
@@ -46,8 +59,15 @@ const EventDetailsScreen = (props) => {
                 </View>
 
                 <View style={styles.infoContainer}>
-                    <Text style={styles.sectionTitle}>Opis wydarzenia</Text>
-                    <Text style={styles.sectionContent}>{eventDetails.text}</Text>
+                    <View style={styles.infoContainer}>
+                        <Text style={styles.sectionTitle}>Opis wydarzenia</Text>
+                        <Text style={styles.sectionContent}>{renderText()}</Text>
+                        {eventDetails?.additionalText?.length > 200 && (
+                            <TouchableOpacity onPress={toggleText}>
+                                <Text style={{color: COLORS.second, fontSize: 16}}>{showFullText ? 'Mniej' : 'Więcej'}</Text>
+                            </TouchableOpacity>
+                        )}
+                    </View>
                 </View>
 
                 <View style={styles.infoContainer}>
@@ -62,7 +82,7 @@ const EventDetailsScreen = (props) => {
                         <ScrollView horizontal>
                             {artists.map((artist, index) => (
                                 <View key={index} style={styles.artistCircle}>
-                                    <Image source={{ uri: artist.image }} style={styles.artistImage} />
+                                    <Image source={{ uri: artist?.image }} style={styles.artistImage} />
                                 </View>
                             ))}
                         </ScrollView>
@@ -80,14 +100,14 @@ const styles = StyleSheet.create({
     },
     infoContainer: {
       paddingBottom: 20,
-      marginBottom: 10,
+      marginBottom: 0,
       // borderBottomWidth: 1,
       // borderColor: COLORS.secondGrey,
     },
     banner: {
-        height: 100,
-        width: '100%',
-        resizeMode: 'contain',
+        height: 650,
+        // width: "auto",
+        resizeMode: "contain",
         elevation: 1,
     },
     sectionTitle: {
@@ -118,6 +138,22 @@ const styles = StyleSheet.create({
         width: 80, // Adjust the width and height to fit the circle without border radius
         height: 80,
         // borderRadius: 40, // Remove this line
+    },
+    titleContainer:{
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingBottom: 20,
+        marginBottom: 0,
+    },
+    titleText: {
+        width: '100%',
+      textAlign: 'center',
+      fontSize: 22,
+      color: COLORS.third,
+      textTransform: "uppercase",
+      borderBottomWidth: 1,
+      paddingBottom: 20,
+      borderColor: COLORS.thirdGrey,
     },
 });
 

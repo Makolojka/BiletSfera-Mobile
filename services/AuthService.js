@@ -41,7 +41,7 @@ class AuthService {
         const token = await AsyncStorage.getItem('token');
         const expirationTime = jwtDecode(token).exp * 1000;
         const currentTime = Date.now();
-        return expirationTime < currentTime;
+        return expirationTime > currentTime;
     }
 
     async getValidToken() {

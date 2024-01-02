@@ -90,20 +90,20 @@ const BottomNavigation = (props) => {
                 }}
             />
 
-            <Tab.Screen
-                name="Koszyk"
-                component={CartScreen}
-                options={{
-                    tabBarLabel: 'Koszyk',
-                    tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="basket" color={COLORS.main} size={size} />
-                    ),
-                    tabBarLabelStyle: {
-                        color: COLORS.main,
-                    },
-                    headerShown: false,
-                }}
-            />
+            {/*<Tab.Screen*/}
+            {/*    name="Koszyk"*/}
+            {/*    component={CartScreen}*/}
+            {/*    options={{*/}
+            {/*        tabBarLabel: 'Koszyk',*/}
+            {/*        tabBarIcon: ({ color, size }) => (*/}
+            {/*            <MaterialCommunityIcons name="basket" color={COLORS.main} size={size} />*/}
+            {/*        ),*/}
+            {/*        tabBarLabelStyle: {*/}
+            {/*            color: COLORS.main,*/}
+            {/*        },*/}
+            {/*        headerShown: false,*/}
+            {/*    }}*/}
+            {/*/>*/}
             <Tab.Screen
                 name="TicketDetails"
                 component={TicketDetailsScreen}
