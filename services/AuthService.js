@@ -37,6 +37,22 @@ class AuthService {
         return false;
     }
 
+    async isTokenExpired() {
+        const token = await AsyncStorage.getItem('token');
+        const expirationTime = jwtDecode(token).exp * 1000;
+        const currentTime = Date.now();
+        return expirationTime < currentTime;
+    }
+
+    async getValidToken() {
+        try {
+            return await AsyncStorage.getItem('token');
+        } catch (error) {
+            console.error('Error getting token:', error);
+            return null;
+        }
+    }
+
     getUserId = async () => {
         try {
             const token = await AsyncStorage.getItem('token');
@@ -97,11 +113,7 @@ class AuthService {
     async isLoggedIn() {
         try {
             const token = await AsyncStorage.getItem('token');
-            if (token !== null && token !== ''){
-                // console.log("token: ", token)
-                return true;
-            }
-            return false; // Returns true if token exists
+            return token !== null && token !== '';
         } catch (error) {
             console.error('Error checking authentication:', error);
         }

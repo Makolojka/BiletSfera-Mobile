@@ -41,16 +41,15 @@ const TicketDetailsScreen = (props) => {
                         <Text style={styles.titleText}>{eventDetails?.title}</Text>
                         <View style={styles.row}>
                             <MaterialIcons style={styles.icon} name="tag" color="#333" />
-                            <Text style={styles.text}>{ticket.ticketName}</Text>
-                            <Text style={styles.text}>x {ticket.count}</Text>
+                            <Text style={styles.text}>{ticket?.ticketName}  x {ticket?.count}</Text>
                         </View>
                         <View style={styles.row}>
                             <MaterialIcons style={styles.icon} name="clock-outline" color="#333" />
-                            <Text style={styles.text}>{eventDetails.date}</Text>
+                            <Text style={styles.text}>{eventDetails?.date}</Text>
                         </View>
                         <View style={styles.row}>
                             <MaterialIcons style={styles.icon} name="google-maps" color="#333" />
-                            <Text style={styles.text}>{eventDetails.location}</Text>
+                            <Text style={styles.text}>{eventDetails?.location}</Text>
                         </View>
                         <View style={styles.row}>
                             <View style={styles.seatNumbers}>
@@ -142,6 +141,7 @@ const styles = StyleSheet.create({
     row: {
         flexDirection: 'row',
         alignItems: 'center',
+        flexWrap: 'wrap',
         marginBottom: 10,
     },
     rowSum: {

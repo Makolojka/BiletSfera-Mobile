@@ -13,7 +13,10 @@ const ProfileScreen = () => {
         async function fetchUserDetails() {
             try {
                 const userDetailsFromToken = await AuthService.getUserDetails();
-                setUserDetails(userDetailsFromToken);
+                if(userDetailsFromToken)
+                {
+                    setUserDetails(userDetailsFromToken);
+                }
             } catch (error) {
                 console.error('Error fetching user details:', error);
             }

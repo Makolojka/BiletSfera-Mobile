@@ -49,17 +49,26 @@ const TransactionsScreen = (props) => {
             {transactions?.map((transaction, index) => (
                 <View key={index} style={styles.transactionItem}>
                     <Text style={styles.transactionDate}>{formatDate(transaction?.saleDate)}</Text>
-                    <Text style={styles.text}>Całkowity koszt zamówienia: {transaction?.totalCost} zł</Text>
-                    <Text style={{marginTop: 10, color: COLORS.third, fontWeight: 'bold'}}>Zakupione bilety:</Text>
+                    <View style={styles.rowSpaced}>
+                        <Text style={styles.textTotal}>
+                            Całkowity koszt zamówienia</Text>
+                        <Text style={styles.textTotal}>
+                            {transaction?.totalCost} zł</Text>
+                    </View>
+                    <Text style={styles.seats}>
+                        Zakupione bilety:</Text>
                     <View>
                         {transaction?.ticketDetails?.map((ticket, idx) => (
                             <View key={idx} style={styles.ticketDetail}>
-                                <Text style={styles.text}>{ticket?.count} bilet(ów) {ticket?.ticketName} - {ticket?.ticketPrice} zł</Text>
+                                <View style={styles.rowSpaced}>
+                                    <Text style={styles.textTotal}>{ticket?.count} bilet(ów) {ticket?.ticketName}</Text>
+                                    {/*<Text style={styles.textTotal}>{ticket?.ticketPrice} zł</Text>*/}
+                                </View>
                                 <TouchableOpacity
                                     style={styles.button}
                                     onPress={() => navigateToTicketDetails(ticket, transaction)}
                                 >
-                                    <Text style={styles.buttonText}>Szczegóły</Text>
+                                    <Text style={styles.buttonText}>Bilet</Text>
                                 </TouchableOpacity>
                             </View>
                         ))}
@@ -73,13 +82,16 @@ const TransactionsScreen = (props) => {
 const styles = StyleSheet.create({
     container: {
         flexGrow: 1,
-        padding: 20,
+        padding: 0,
     },
     title: {
         fontSize: 20,
-        // borderBottomWidth: 1,
-        // paddingBottom: 20,
-        marginBottom: 20,
+        borderBottomWidth: 1,
+        paddingBottom: 10,
+        marginBottom: 10,
+        padding: 20,
+        paddingLeft: 20,
+        marginLeft: 0,
         color: COLORS.third,
         // borderBottomColor: COLORS.third,
         textTransform: 'uppercase',
@@ -88,15 +100,18 @@ const styles = StyleSheet.create({
     },
     transactionItem: {
         marginBottom: 20,
-        borderWidth: 1,
-        borderColor: COLORS.third,
-        padding: 10,
-        elevation: 1,
+        borderBottomWidth: 1,
+        borderBottomColor: COLORS.mainGrey,
+        // borderTopColor: COLORS.main,
+        padding: 20,
+        paddingTop: 5,
+        // elevation: 1,
     },
     transactionDate: {
         fontWeight: 'bold',
         marginBottom: 5,
-        color: COLORS.third
+        color: COLORS.third,
+        fontSize: 18,
     },
     ticketDetail: {
         marginBottom: 5,
@@ -104,9 +119,20 @@ const styles = StyleSheet.create({
     text: {
         color: 'black'
     },
+    textTotal: {
+      color: COLORS.mainGreyDark,
+        fontSize: 16,
+    },
+    seats: {
+        fontSize: 16,
+        marginTop: 10,
+        marginBottom: 5,
+        color: COLORS.third,
+        fontWeight: 'bold'
+    },
     button:{
         borderWidth: 1,
-        borderColor: COLORS.third,
+        borderColor: COLORS.second,
         backgroundColor: COLORS.second,
         textAlign: "center",
         alignItems: 'center',
@@ -119,7 +145,11 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
         fontSize: 12,
         fontWeight: "bold",
-    }
+    },
+    rowSpaced: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+    },
 });
 
 export default TransactionsScreen;
