@@ -4,10 +4,30 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import {COLORS} from "../components/screens/Colors";
 import BottomNavigation from "./BottomNavigation";
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import AuthService from "../services/AuthService";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {jwtDecode} from "jwt-decode";
 
 const Tab = createNativeStackNavigator();
 
 const LoginTabs = (props) => {
+    useEffect(() => {
+        const fetchData = async () => {
+            const token = await AsyncStorage.getItem('token');
+            const expirationTime = jwtDecode(token).exp * 1000;
+            const currentTime = Date.now();
+            if(expirationTime > currentTime){
+                console.log("Token valid");
+            }
+            else{
+                await AsyncStorage.removeItem('token');
+                props.navigation.navigate('Login');
+                console.log("Token expired");
+            }
+        }
+        fetchData()
+            .catch(console.error);
+    }, [])
     return (
         <Tab.Navigator >
             <Tab.Screen

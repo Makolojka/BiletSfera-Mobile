@@ -1,10 +1,8 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from "axios";
-import { jwtDecode } from 'jwt-decode';
 import { decode } from "base-64";
 import AuthService from "./AuthService";
 global.atob = decode;
-
 class DataService {
     url = 'http://10.0.2.2:3001/api';
     async getAllTransactions() {
@@ -37,6 +35,16 @@ class DataService {
         try {
             const response = await axios.get(this.url+ '/events/'+eventId);
             // console.log("response: ",response.data)
+            return response.data;
+        } catch (error) {
+            console.error('Error fetching ticket details:', error);
+            throw error;
+        }
+    }
+
+    async getArtistDetailsById(eventId) {
+        try {
+            const response = await axios.get(this.url+ '/events/'+eventId + '/artists');
             return response.data;
         } catch (error) {
             console.error('Error fetching ticket details:', error);

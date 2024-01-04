@@ -26,20 +26,16 @@ const HomeScreen = (props) => {
     };
 
     return (
-            <ScrollView contentContainerStyle={styles.container}>
-                <Text style={styles.title}>Panel użytkownika</Text>
-                <View style={styles.tilesContainer}>
-                    <View style={styles.row}>
-                        <Tile iconName={'basket'} title="Koszyk" onPress={() => props.navigation.navigate('Koszyk')} />
-                        <Tile iconName={'ticket'} title="Transakcje" onPress={() => props.navigation.navigate('Transakcje')} />
-                    </View>
-                    <View style={styles.row}>
-                        <Tile iconName={'account'} title="Profil" onPress={() => props.navigation.navigate('Profil')} />
-                        <Tile iconName={'logout'} title="Wyloguj się" onPress={() => logout()} />
-                    </View>
+        <ScrollView contentContainerStyle={styles.container}>
+            <Text style={styles.title}>Panel użytkownika</Text>
+            <View style={styles.tilesContainer}>
+                <View style={styles.column}>
+                    <Tile iconName={'account'} title="Profil" onPress={() => props.navigation.navigate('Profil')} />
+                    <Tile iconName={'ticket'} title="Transakcje" onPress={() => props.navigation.navigate('Transakcje')} />
+                    <Tile iconName={'logout'} title="Wyloguj się" onPress={() => logout()} />
                 </View>
-            </ScrollView>
-        // </ImageBackground>
+            </View>
+        </ScrollView>
     );
 };
 
@@ -68,9 +64,11 @@ const styles = StyleSheet.create({
     tilesContainer: {
         flexDirection: 'column',
         alignItems: 'center',
+        justifyContent: 'center',
     },
-    row: {
-        flexDirection: 'row',
+    column: {
+        flexDirection: 'column',
+        alignItems: 'center',
         justifyContent: 'space-between',
         width: '100%',
         marginVertical: 5,
