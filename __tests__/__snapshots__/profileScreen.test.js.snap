@@ -1,0 +1,162 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    {
+      "backgroundColor": "transparent",
+      "flexGrow": 1,
+      "padding": 20,
+    }
+  }
+>
+  <Text
+    style={
+      {
+        "color": "#2d1a42",
+        "fontSize": 20,
+        "fontWeight": "bold",
+        "marginBottom": 10,
+        "textAlign": "left",
+        "textTransform": "uppercase",
+      }
+    }
+  >
+    Profil
+  </Text>
+  <View
+    style={
+      {
+        "borderBottomWidth": 1,
+        "borderColor": "#cccccc",
+        "flexDirection": "column",
+        "margin": 10,
+        "padding": 10,
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "flexDirection": "row",
+          "marginBottom": 10,
+        }
+      }
+    >
+      <Text
+        allowFontScaling={false}
+        selectable={false}
+        style={
+          [
+            {
+              "color": "#333",
+              "fontSize": 40,
+            },
+            {
+              "color": "#2d1a42",
+              "fontSize": 30,
+            },
+            {
+              "fontFamily": "Material Design Icons",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+            {},
+          ]
+        }
+      >
+        󰶫
+      </Text>
+      <Text
+        style={
+          {
+            "color": "#2d1a42",
+            "fontSize": 22,
+            "marginLeft": 10,
+            "textAlign": "left",
+          }
+        }
+      >
+        Nazwa
+      </Text>
+    </View>
+    <Text
+      style={
+        {
+          "color": "#2d1a42",
+          "fontSize": 22,
+          "marginLeft": 10,
+          "textAlign": "left",
+        }
+      }
+    />
+  </View>
+  <View
+    style={
+      {
+        "borderBottomWidth": 1,
+        "borderColor": "#cccccc",
+        "flexDirection": "column",
+        "margin": 10,
+        "padding": 10,
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "flexDirection": "row",
+          "marginBottom": 10,
+        }
+      }
+    >
+      <Text
+        allowFontScaling={false}
+        selectable={false}
+        style={
+          [
+            {
+              "color": "#333",
+              "fontSize": 40,
+            },
+            {
+              "color": "#2d1a42",
+              "fontSize": 30,
+            },
+            {
+              "fontFamily": "Material Design Icons",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+            {},
+          ]
+        }
+      >
+        󰇮
+      </Text>
+      <Text
+        style={
+          {
+            "color": "#2d1a42",
+            "fontSize": 22,
+            "marginLeft": 10,
+            "textAlign": "left",
+          }
+        }
+      >
+        Email
+      </Text>
+    </View>
+    <Text
+      style={
+        {
+          "color": "#2d1a42",
+          "fontSize": 22,
+          "marginLeft": 10,
+          "textAlign": "left",
+        }
+      }
+    />
+  </View>
+</View>
+`;
