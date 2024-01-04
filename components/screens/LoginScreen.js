@@ -131,11 +131,11 @@ const LoginScreen = (props) => {
                         <TouchableOpacity style={styles.button} onPress={validateFields}>
                             <Text style={styles.text}>Zaloguj się</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity>
-                            <Text style={styles.register} onPress={goToRegister}>
-                                Nie masz konta? Zarejestruj się.
-                            </Text>
-                        </TouchableOpacity>
+                        {/*<TouchableOpacity>*/}
+                        {/*    <Text style={styles.register} onPress={goToRegister}>*/}
+                        {/*        Nie masz konta? Zarejestruj się.*/}
+                        {/*    </Text>*/}
+                        {/*</TouchableOpacity>*/}
                     </View>
                 </View>
             </View>

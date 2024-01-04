@@ -41,12 +41,14 @@ const EventDetailsScreen = (props) => {
 
     return (
         <ScrollView>
+            {eventDetails && eventDetails.image && (
             <ImageBackground
                 source={{ uri: eventDetails.image }}
                 style={styles.banner}
             >
                 {/* Top banner */}
             </ImageBackground>
+            )}
             <View style={styles.container}>
                 <View style={styles.titleContainer}>
                     {/*<Text style={styles.sectionTitle}>Nazwa wydarzenia</Text>*/}
@@ -82,7 +84,9 @@ const EventDetailsScreen = (props) => {
                         <ScrollView horizontal>
                             {artists.map((artist, index) => (
                                 <View key={index} style={styles.artistCircle}>
-                                    <Image source={{ uri: artist?.image }} style={styles.artistImage} />
+                                    {artist && artist.image && (
+                                        <Image source={{ uri: artist.image }} style={styles.artistImage} />
+                                    )}
                                 </View>
                             ))}
                         </ScrollView>

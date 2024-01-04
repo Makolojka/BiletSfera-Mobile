@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     container: {
-        // flexGrow: 1,
+        flexGrow: 1,
         padding: 20,
         backgroundColor: 'white'
     },
