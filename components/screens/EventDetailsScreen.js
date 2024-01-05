@@ -23,18 +23,12 @@ const EventDetailsScreen = (props) => {
     };
 
     useEffect(() => {
+        let eventId = props.route.params.eventId;
         const fetchData = async () => {
-            const eventDetails = await DataService.getEventDetailsById(props.route.params.eventId);
-            // console.log("eventDetails: ",eventDetails)
-            // console.log("eventDetails artists: ",eventDetails.artists)
+            const eventDetails = await DataService.getEventDetailsById(eventId);
             setEventDetails(eventDetails);
-
-            const artists = await DataService.getArtistDetailsById(props.route.params.eventId);
-            // console.log("artists: ",artists)
+            const artists = await DataService.getArtistDetailsById(eventId);
             setArtists(artists);
-            // setTicket(props.route.params.ticket);
-            // setTransaction(props.route.params.transaction);
-            // // props.route.params.transaction?.tickets[0].seatNumbers.length
         };
         fetchData();
     }, [props.route.params.eventId]);

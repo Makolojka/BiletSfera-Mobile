@@ -9,6 +9,7 @@ const renderText = (eventDetails, showFullText) => {
 
 describe('renderText method', () => {
     test('returns additionalText truncated to 200 characters followed by ellipsis if length is greater than 200', () => {
+        // Assign
         const eventDetails = {
             additionalText: 'This is a longer text that exceeds 200 characters for testing purposes.' +
                 'This is a longer text that exceeds 200 characters for testing purposes.' +
@@ -20,8 +21,10 @@ describe('renderText method', () => {
         };
         const showFullText = false;
 
+        //Act
         const expected = 'This is a longer text that exceeds 200 characters for testing purposes.This is a longer text that exceeds 200 characters for testing purposes.This is a longer text that exceeds 200 characters for test...';
 
+        // Assert
         expect(renderText(eventDetails, showFullText)).toEqual(expected);
     });
 
