@@ -32,7 +32,6 @@ class AuthService {
             if (error.response && error.response.status === 401) {
                 return 'Unauthorized';
             }
-            console.error('Authentication error:', error);
         }
         return false;
     }
