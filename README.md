@@ -19,6 +19,9 @@ Aplikacja mobilna pozwala użytkownikom przeglądać zakupione bilety, generowa�
    ```bash
    npm start
 
+## Uwaga!
+Aplikacja mobilna wymaga dostępu do serwera z bazą danych, przykładowy serwer znajduje się tutaj: 
+
 ## Aplikacja w praktyce
 
 <table>
