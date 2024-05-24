@@ -20,7 +20,7 @@ Aplikacja mobilna pozwala użytkownikom przeglądać zakupione bilety, generowa�
    npm start
 
 ## Uwaga!
-Aplikacja mobilna wymaga dostępu do serwera z bazą danych, przykładowy serwer znajduje się tutaj: 
+Aplikacja mobilna wymaga dostępu do serwera z bazą danych, przykładowy serwer znajduje się tutaj: https://github.com/Makolojka/bilet-sfera-server/tree/develop
 
 ## Aplikacja w praktyce
 
